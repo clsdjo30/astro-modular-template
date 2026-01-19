@@ -1,0 +1,63 @@
+---
+import Header from "../components/layout/Header.astro";
+import Footer from "../components/layout/Footer.astro";
+const { title = "Site" } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  :global(:root) {
+    color: #111;
+    background: #fff;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+
+  :global(body) {
+    margin: 0;
+  }
+
+  :global(a) {
+    color: inherit;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: -999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .skip-link:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #111;
+  }
+
+  :global(main) {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 3rem;
+  }
+</style>

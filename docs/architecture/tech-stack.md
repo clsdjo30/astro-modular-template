@@ -3,11 +3,11 @@
 ## Technology Stack Table
 | Category | Technology | Version | Purpose | Rationale |
 | --- | --- | --- | --- | --- |
-| Frontend Language | TypeScript | 5.6.0 | Type-safe UI and tooling | Matches Astro + strong typing preference |
+| Frontend Language | TypeScript | 5.5.4 | Type-safe UI and tooling | Matches Astro + strong typing preference |
 | Frontend Framework | Astro | 5.0.0 | Static-first UI generation | Static by default, framework-agnostic |
 | UI Component Library | None (custom minimal) | N/A | Neutral, minimal UI | Avoids default branding |
 | State Management | Minimal (local state + URL) | N/A | Simple UI flows | Avoids unnecessary complexity |
-| Backend Language | TypeScript | 5.6.0 | API service | Consistency across stack |
+| Backend Language | TypeScript | 5.5.4 | API service | Consistency across stack |
 | Runtime (Node.js) | Node.js | 22.19.0 | CLI/API runtime | Pinned LTS |
 | Backend Framework | Express | Latest stable | JSON API service | Simple, self-hosted, widely supported |
 | API Style | REST | N/A | JSON API endpoints | Matches PRD API contract |
