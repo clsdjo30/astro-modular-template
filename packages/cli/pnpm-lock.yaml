@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@astro-template/shared':
+        specifier: file:../shared
+        version: file:../shared
     devDependencies:
       '@types/node':
         specifier: 22.13.4
@@ -23,6 +27,9 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
+
+  '@astro-template/shared@file:../shared':
+    resolution: {directory: ../shared, type: directory}
 
   '@esbuild/aix-ppc64@0.21.5':
     resolution: {integrity: sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ==}
@@ -583,12 +590,19 @@ packages:
     engines: {node: '>=8'}
     hasBin: true
 
+  zod@3.24.1:
+    resolution: {integrity: sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A==}
+
 snapshots:
 
   '@ampproject/remapping@2.3.0':
     dependencies:
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.31
+
+  '@astro-template/shared@file:../shared':
+    dependencies:
+      zod: 3.24.1
 
   '@esbuild/aix-ppc64@0.21.5':
     optional: true
@@ -1043,3 +1057,5 @@ snapshots:
     dependencies:
       siginfo: 2.0.0
       stackback: 0.0.2
+
+  zod@3.24.1: {}

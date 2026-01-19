@@ -1,0 +1,14 @@
+id: example-module
+description: Example module manifest for schema validation.
+dependencies: []
+conflicts: []
+ownership:
+  files:
+    - src/pages/example.astro
+  patches:
+    - target: src/layouts/BaseLayout.astro
+      insert: append
+      marker: example-module-footer
+config:
+  keys:
+    - modules.example.enabled
