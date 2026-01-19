@@ -1,4 +1,6 @@
 ---
+import { appConfig } from "../../config/app.config";
+
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
@@ -8,7 +10,7 @@ const navItems = [
 ---
 <header>
   <div class="wrap">
-    <a class="brand" href="/">Site</a>
+    <a class="brand" href="/">{appConfig.siteName}</a>
     <nav aria-label="Primary">
       <ul>
         {navItems.map((item) => (
