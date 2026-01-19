@@ -1,0 +1,22 @@
+{
+  "name": "@astro-template/cli",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@10.0.0",
+  "engines": {
+    "node": "22.19.0"
+  },
+  "bin": {
+    "astro-template": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "22.13.4",
+    "typescript": "5.5.4",
+    "vitest": "2.0.0"
+  }
+}
