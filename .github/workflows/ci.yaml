@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.19.0"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: "10.0.0"
+
+      - name: Install CLI deps
+        working-directory: packages/cli
+        run: pnpm install
+
+      - name: Build CLI
+        working-directory: packages/cli
+        run: pnpm build
+
+      - name: Generate project from base template
+        run: |
+          TMP_DIR=$(mktemp -d)
+          node packages/cli/dist/index.js create "$TMP_DIR/app"
+          echo "APP_DIR=$TMP_DIR/app" >> "$GITHUB_ENV"
+
+      - name: Install generated project deps
+        working-directory: ${{ env.APP_DIR }}
+        run: pnpm install
+
+      - name: Lint
+        working-directory: ${{ env.APP_DIR }}
+        run: pnpm lint
+
+      - name: Typecheck
+        working-directory: ${{ env.APP_DIR }}
+        run: pnpm typecheck
+
+      - name: Astro check
+        working-directory: ${{ env.APP_DIR }}
+        run: pnpm astro check
+
+      - name: Build
+        working-directory: ${{ env.APP_DIR }}
+        run: pnpm build
