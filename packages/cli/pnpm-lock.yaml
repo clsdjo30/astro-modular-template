@@ -21,6 +21,9 @@ importers:
       vitest:
         specifier: 2.0.0
         version: 2.0.0(@types/node@22.13.4)
+      yaml:
+        specifier: 2.4.5
+        version: 2.4.5
 
 packages:
 
@@ -590,6 +593,11 @@ packages:
     engines: {node: '>=8'}
     hasBin: true
 
+  yaml@2.4.5:
+    resolution: {integrity: sha512-aBx2bnqDzVOyNKfsysjA2ms5ZlnjSAW2eG3/L5G/CSujfjLJTJsEw1bGw8kCf04KodQWk1pxlGnZ56CRxiawmg==}
+    engines: {node: '>= 14'}
+    hasBin: true
+
   zod@3.24.1:
     resolution: {integrity: sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A==}
 
@@ -1057,5 +1065,7 @@ snapshots:
     dependencies:
       siginfo: 2.0.0
       stackback: 0.0.2
+
+  yaml@2.4.5: {}
 
   zod@3.24.1: {}

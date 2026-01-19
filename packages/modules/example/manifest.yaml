@@ -8,7 +8,7 @@ ownership:
   patches:
     - target: src/layouts/BaseLayout.astro
       insert: append
-      marker: example-module-footer
+      marker: head-meta
 config:
   keys:
     - modules.example.enabled
