@@ -1,0 +1,9 @@
+id: static
+description: Static hosting preset with deployment guidance.
+dependencies: []
+conflicts: []
+ownership:
+  files: []
+  patches: []
+config:
+  keys: []

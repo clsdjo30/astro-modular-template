@@ -22,6 +22,11 @@ pnpm test
 pnpm astro:check
 ```
 
+## Static Hosting
+- Build output is in `dist/`.
+- Deploy `dist/` to any static host.
+- Only `PUBLIC_*` env vars are exposed to the client.
+
 ## Pinned Versions
 - Astro 5.0.0
 - TypeScript 5.6.0
