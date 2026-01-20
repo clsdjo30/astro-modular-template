@@ -1,0 +1,12 @@
+id: vitrine
+description: Static marketing preset with core pages.
+dependencies: []
+conflicts: []
+ownership:
+  files:
+    - src/pages/about.astro
+    - src/pages/services.astro
+    - src/pages/contact.astro
+  patches: []
+config:
+  keys: []
