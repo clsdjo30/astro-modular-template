@@ -5,7 +5,7 @@ const routes = ["/", "/about", "/services", "/contact", "/blog"];
 export const GET: APIRoute = ({ site }) => {
   const base = site?.toString() ?? "https://example.com/";
   const urls = routes
-    .map((route) => `<url><loc>${new URL(route, base).toString()}</loc></url>`)
+    .map((route) => `<url><loc>${new globalThis.URL(route, base).toString()}</loc></url>`)
     .join("");
 
   const sitemap = [
@@ -15,7 +15,7 @@ export const GET: APIRoute = ({ site }) => {
     "</urlset>"
   ].join("");
 
-  return new Response(sitemap, {
+  return new globalThis.Response(sitemap, {
     headers: {
       "Content-Type": "application/xml"
     }
