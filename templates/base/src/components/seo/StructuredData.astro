@@ -26,6 +26,7 @@ const webpageSchema = {
   url: resolvedUrl ?? undefined
 };
 
-const schemas = [websiteSchema, webpageSchema];
+const jsonLdContent = JSON.stringify([websiteSchema, webpageSchema]);
 ---
-<script type="application/ld+json">{JSON.stringify(schemas)}</script>
+
+<script type="application/ld+json" is:inline set:html={jsonLdContent} />
