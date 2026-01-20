@@ -1,0 +1,14 @@
+id: forms
+description: Static contact form module using Formspree.
+dependencies: []
+conflicts: []
+ownership:
+  files:
+    - src/components/forms/ContactForm.astro
+  patches:
+    - target: src/pages/contact.astro
+      insert: append
+      marker: contact-form
+config:
+  keys:
+    - modules.forms.actionUrl

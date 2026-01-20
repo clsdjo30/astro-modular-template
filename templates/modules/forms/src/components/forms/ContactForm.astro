@@ -1,0 +1,68 @@
+---
+import { appConfig } from "../../config/app.config";
+
+const actionUrl = appConfig.modules.forms.actionUrl;
+---
+<form action={actionUrl} method="POST">
+  <div>
+    <label for="contact-name">Name</label>
+    <input id="contact-name" name="name" type="text" required />
+    <p class="field-hint">Required field.</p>
+  </div>
+  <div>
+    <label for="contact-email">Email</label>
+    <input id="contact-email" name="email" type="email" required />
+    <p class="field-hint">Required field.</p>
+  </div>
+  <div>
+    <label for="contact-message">Message</label>
+    <textarea id="contact-message" name="message" rows="6" required></textarea>
+    <p class="field-hint">Required field.</p>
+  </div>
+  <p class="form-note">
+    Add any required Formspree hidden fields (for example, subject or redirect).
+  </p>
+  <button type="submit">Send message</button>
+</form>
+
+<style>
+  form {
+    display: grid;
+    gap: 1rem;
+    max-width: 32rem;
+  }
+
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .field-hint {
+    font-size: 0.875rem;
+    color: #555;
+    margin: 0.25rem 0 0;
+  }
+
+  .form-note {
+    font-size: 0.875rem;
+    color: #555;
+  }
+
+  button {
+    align-self: start;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid #111;
+    background: #111;
+    color: #fff;
+    cursor: pointer;
+  }
+</style>
