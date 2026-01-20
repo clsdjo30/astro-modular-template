@@ -7,6 +7,9 @@ export interface Env {
   dbUser: string;
   dbPassword: string;
   dbName: string;
+  sessionSecret: string;
+  sessionName: string;
+  isProd: boolean;
 }
 
 function parseNumber(value: string | undefined, fallback: number): number {
@@ -34,5 +37,8 @@ export const env: Env = {
   dbPort,
   dbUser: process.env.DB_USER ?? "root",
   dbPassword: process.env.DB_PASSWORD ?? "",
-  dbName: process.env.DB_NAME ?? "astro_template"
+  dbName: process.env.DB_NAME ?? "astro_template",
+  sessionSecret: process.env.SESSION_SECRET ?? "change-me",
+  sessionName: process.env.SESSION_NAME ?? "astro_session",
+  isProd: process.env.NODE_ENV === "production"
 };

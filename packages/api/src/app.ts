@@ -2,9 +2,12 @@ import express from "express";
 import cors from "cors";
 import { pinoHttp } from "pino-http";
 import { env } from "./config/env.js";
+import type { IncomingMessage } from "node:http";
 import { db } from "./db/index.js";
 import { errorMiddleware } from "./middleware/error.middleware.js";
 import { requestIdMiddleware } from "./middleware/request-id.middleware.js";
+import { buildSessionMiddleware } from "./middleware/session.middleware.js";
+import { authRouter } from "./routes/auth.routes.js";
 import { logger } from "./utils/logger.js";
 
 const allowedOrigins = env.apiAllowedOrigin
@@ -18,10 +21,11 @@ app.use(requestIdMiddleware);
 app.use(
   pinoHttp({
     logger,
-    customProps: (req) => ({ requestId: (req as { id?: string }).id })
+    customProps: (req: IncomingMessage) => ({ requestId: (req as { id?: string }).id })
   })
 );
 app.use(express.json());
+app.use(buildSessionMiddleware());
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -45,5 +49,7 @@ app.get("/readyz", async (_req, res, next) => {
     next(err);
   }
 });
+
+app.use("/api/v1/auth", authRouter);
 
 app.use(errorMiddleware);
