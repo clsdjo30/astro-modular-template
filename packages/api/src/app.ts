@@ -9,6 +9,7 @@ import { requestIdMiddleware } from "./middleware/request-id.middleware.js";
 import { buildSessionMiddleware } from "./middleware/session.middleware.js";
 import { authRouter } from "./routes/auth.routes.js";
 import { cartRouter } from "./routes/cart.routes.js";
+import { ordersRouter } from "./routes/orders.routes.js";
 import { productsRouter } from "./routes/products.routes.js";
 import { logger } from "./utils/logger.js";
 
@@ -54,6 +55,7 @@ app.get("/readyz", async (_req, res, next) => {
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/cart", cartRouter);
+app.use("/api/v1/orders", ordersRouter);
 app.use("/api/v1/products", productsRouter);
 
 app.use(errorMiddleware);
