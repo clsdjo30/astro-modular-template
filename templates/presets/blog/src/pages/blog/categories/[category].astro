@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  const categories = new Set<string>();
+  for (const post of posts) {
+    categories.add(post.data.category);
+  }
+  return Array.from(categories).map((category) => ({
+    params: { category },
+    props: { category }
+  }));
+}
+
+const { category } = Astro.props;
+const posts = (await getCollection("posts")).filter(
+  (post) => post.data.category === category
+);
+---
+<BaseLayout title={`Category: ${category}`}>
+  <h1>Category: {category}</h1>
+  <ul>
+    {posts.map((post) => (
+      <li>
+        <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

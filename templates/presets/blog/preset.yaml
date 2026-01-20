@@ -1,0 +1,16 @@
+id: blog
+description: Static blog preset with content collections and routes.
+dependencies: []
+conflicts: []
+ownership:
+  files:
+    - src/content/config.ts
+    - src/content/posts/hello-world.md
+    - src/pages/blog/index.astro
+    - src/pages/blog/[slug].astro
+    - src/pages/blog/tags/[tag].astro
+    - src/pages/blog/categories/[category].astro
+    - src/pages/rss.xml.ts
+  patches: []
+config:
+  keys: []
