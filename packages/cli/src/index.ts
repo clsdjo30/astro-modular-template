@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 import { parseArgs } from "./args.js";
 import { promptForPath } from "./prompt.js";
 import { createProject } from "./create.js";
+import { removeModule } from "./remove.js";
 
 function getRepoRoot(): string {
   const __filename = fileURLToPath(import.meta.url);
@@ -15,30 +16,52 @@ function getTemplateDir(): string {
 }
 
 async function main(): Promise<void> {
-  const { command, targetPath } = parseArgs(process.argv);
-
-  if (command !== "create") {
-    console.error("Usage: astro-template create <path>");
-    process.exit(1);
-  }
-
-  const resolvedPath = targetPath ?? (await promptForPath());
-  if (!resolvedPath) {
-    console.error("Project path is required.");
-    process.exit(1);
-  }
+  const { command, targetPath, moduleName } = parseArgs(process.argv);
 
   const templateDir = getTemplateDir();
-  const result = await createProject(templateDir, resolvedPath);
+  if (command === "create") {
+    const resolvedPath = targetPath ?? (await promptForPath());
+    if (!resolvedPath) {
+      console.error("Project path is required.");
+      process.exit(1);
+    }
 
-  console.log(`Created project at ${result.targetPath}`);
-  console.log("Next steps:");
-  console.log(`  cd ${result.targetPath}`);
-  console.log("  pnpm install");
-  console.log("  pnpm lint");
-  console.log("  pnpm typecheck");
-  console.log("  pnpm test");
-  console.log("  pnpm build");
+    const result = await createProject(templateDir, resolvedPath);
+
+    console.log(`Created project at ${result.targetPath}`);
+    console.log("Next steps:");
+    console.log(`  cd ${result.targetPath}`);
+    console.log("  pnpm install");
+    console.log("  pnpm lint");
+    console.log("  pnpm typecheck");
+    console.log("  pnpm test");
+    console.log("  pnpm build");
+    return;
+  }
+
+  if (command === "remove") {
+    if (!moduleName) {
+      console.error("Module name is required.");
+      process.exit(1);
+    }
+
+    const result = await removeModule({
+      repoRoot: getRepoRoot(),
+      projectRoot: process.cwd(),
+      moduleName
+    });
+
+    for (const warning of result.warnings) {
+      console.warn(warning);
+    }
+    if (result.removedFiles.length || result.removedPatches.length) {
+      console.log(`Removed module ${moduleName}.`);
+    }
+    return;
+  }
+
+  console.error("Usage: astro-template create <path> | remove <module>");
+  process.exit(1);
 }
 
 main().catch((err) => {

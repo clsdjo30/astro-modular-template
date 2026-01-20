@@ -25,6 +25,12 @@ function moduleBlockMarker(moduleId: string, edge: "begin" | "end"): string {
   return `<!-- @mod:module ${moduleId} ${edge} -->`;
 }
 
+export interface PatchRemovalResult {
+  content: string;
+  removed: boolean;
+  warning?: string;
+}
+
 export function insertAtPatchPoint(
   content: string,
   markerName: string,
@@ -66,4 +72,45 @@ export function insertAtPatchPoint(
 
   const newBlock = `${before}${newMiddle}${after}`;
   return content.slice(0, start) + newBlock + content.slice(end);
+}
+
+export function removeModuleFromPatchPoint(
+  content: string,
+  markerName: string,
+  moduleId: string
+): PatchRemovalResult {
+  let bounds: { start: number; end: number };
+  try {
+    bounds = findPatchBounds(content, markerName);
+  } catch (err) {
+    return {
+      content,
+      removed: false,
+      warning: err instanceof Error ? err.message : String(err)
+    };
+  }
+
+  const block = content.slice(bounds.start, bounds.end);
+  const moduleBegin = moduleBlockMarker(moduleId, "begin");
+  const moduleEnd = moduleBlockMarker(moduleId, "end");
+
+  const beginIndex = block.indexOf(moduleBegin);
+  const endIndex = block.indexOf(moduleEnd);
+  if (beginIndex === -1 || endIndex === -1 || endIndex < beginIndex) {
+    return {
+      content,
+      removed: false,
+      warning: `Module block markers missing or malformed for ${moduleId} in patch point ${markerName}`
+    };
+  }
+
+  let before = block.slice(0, beginIndex);
+  let after = block.slice(endIndex + moduleEnd.length);
+  if (before.endsWith("\n") && after.startsWith("\n")) {
+    after = after.slice(1);
+  }
+
+  const newBlock = before + after;
+  const updated = content.slice(0, bounds.start) + newBlock + content.slice(bounds.end);
+  return { content: updated, removed: true };
 }
