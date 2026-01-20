@@ -1,0 +1,9 @@
+id: o2switch
+description: o2switch deployment preset for static UI + Node.js API (optional SSR).
+dependencies: []
+conflicts: []
+ownership:
+  files: []
+  patches: []
+config:
+  keys: []
