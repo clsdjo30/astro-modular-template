@@ -1,15 +1,31 @@
 ---
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
+import SeoHead from "../components/seo/SeoHead.astro";
+import StructuredData from "../components/seo/StructuredData.astro";
 import { appConfig } from "../config/app.config";
-const { title = appConfig.siteName } = Astro.props;
+
+const {
+  title = appConfig.siteName,
+  description,
+  canonical,
+  image,
+  type
+} = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <SeoHead
+      title={title}
+      description={description}
+      canonical={canonical}
+      image={image}
+      type={type}
+    />
+    <StructuredData title={title} description={description} url={canonical} />
 <!-- @mod:begin head-meta -->
 <!-- @mod:end head-meta -->
   </head>

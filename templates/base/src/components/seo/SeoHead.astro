@@ -1,0 +1,29 @@
+---
+import { appConfig } from "../../config/app.config";
+
+const {
+  title = appConfig.siteName,
+  description = "A minimal, accessible Astro site.",
+  canonical,
+  type = "website",
+  image
+} = Astro.props;
+
+const site = Astro.site?.toString();
+const resolvedCanonical = canonical ?? (site ? new URL(Astro.url.pathname, site).toString() : null);
+const resolvedImage = image ?? null;
+const twitterCard = resolvedImage ? "summary_large_image" : "summary";
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+{resolvedCanonical && <link rel="canonical" href={resolvedCanonical} />}
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+{resolvedCanonical && <meta property="og:url" content={resolvedCanonical} />}
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={appConfig.siteName} />
+{resolvedImage && <meta property="og:image" content={resolvedImage} />}
+<meta name="twitter:card" content={twitterCard} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{resolvedImage && <meta name="twitter:image" content={resolvedImage} />}

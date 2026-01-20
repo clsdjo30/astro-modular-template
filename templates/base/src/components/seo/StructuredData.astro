@@ -1,0 +1,31 @@
+---
+import { appConfig } from "../../config/app.config";
+
+const {
+  title = appConfig.siteName,
+  description = "A minimal, accessible Astro site.",
+  url
+} = Astro.props;
+
+const site = Astro.site?.toString();
+const resolvedUrl = url ?? (site ? new URL(Astro.url.pathname, site).toString() : null);
+const websiteUrl = site ?? resolvedUrl;
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: appConfig.siteName,
+  url: websiteUrl ?? undefined
+};
+
+const webpageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: title,
+  description,
+  url: resolvedUrl ?? undefined
+};
+
+const schemas = [websiteSchema, webpageSchema];
+---
+<script type="application/ld+json">{JSON.stringify(schemas)}</script>
