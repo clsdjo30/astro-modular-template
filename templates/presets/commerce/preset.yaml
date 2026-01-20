@@ -1,0 +1,18 @@
+id: commerce
+description: Commerce preset with catalog, cart, and checkout flows.
+dependencies: []
+conflicts: []
+ownership:
+  files:
+    - src/services/apiClient.ts
+    - src/services/productService.ts
+    - src/services/cartService.ts
+    - src/pages/products/index.astro
+    - src/pages/products/[id].astro
+    - src/pages/cart.astro
+    - src/pages/checkout.astro
+    - src/scripts/cart.ts
+    - src/scripts/checkout.ts
+  patches: []
+config:
+  keys: []

@@ -1,0 +1,58 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout title="Checkout">
+  <h1>Checkout</h1>
+  <p id="checkout-status"></p>
+  <form id="checkout-form">
+    <div>
+      <label for="customerName">Name</label>
+      <input id="customerName" name="customerName" type="text" required />
+    </div>
+    <div>
+      <label for="customerEmail">Email</label>
+      <input id="customerEmail" name="customerEmail" type="email" required />
+    </div>
+    <div>
+      <label for="customerPhone">Phone</label>
+      <input id="customerPhone" name="customerPhone" type="tel" required />
+    </div>
+    <div>
+      <label for="fulfillmentType">Fulfillment</label>
+      <select id="fulfillmentType" name="fulfillmentType">
+        <option value="pickup">Pickup</option>
+        <option value="delivery">Delivery</option>
+      </select>
+    </div>
+    <div>
+      <label for="notes">Notes</label>
+      <textarea id="notes" name="notes" rows="4"></textarea>
+    </div>
+    <button type="submit">Place order</button>
+  </form>
+</BaseLayout>
+
+<script type="module" src={Astro.resolve("../scripts/checkout.ts")}></script>
+
+<style>
+  form {
+    display: grid;
+    gap: 1rem;
+    max-width: 32rem;
+  }
+
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+</style>

@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout title="Cart">
+  <h1>Cart</h1>
+  <p id="cart-status"></p>
+  <ul id="cart-items" class="cart-list"></ul>
+  <p id="cart-total" class="cart-total"></p>
+  <a class="checkout-link" href="/checkout">Go to checkout</a>
+</BaseLayout>
+
+<script type="module" src={Astro.resolve("../scripts/cart.ts")}></script>
+
+<style>
+  .cart-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .cart-total {
+    font-weight: 600;
+  }
+
+  .checkout-link {
+    display: inline-block;
+    margin-top: 1rem;
+    text-decoration: none;
+  }
+</style>
