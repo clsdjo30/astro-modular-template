@@ -12,6 +12,11 @@ describe("parseArgs", () => {
     expect(result).toEqual({ command: "remove", targetPath: null, moduleName: "blog" });
   });
 
+  it("parses docs command without args", () => {
+    const result = parseArgs(["node", "cli", "docs"]);
+    expect(result).toEqual({ command: "docs", targetPath: null, moduleName: null });
+  });
+
   it("returns nulls when missing args", () => {
     const result = parseArgs(["node", "cli"]);
     expect(result).toEqual({ command: null, targetPath: null, moduleName: null });

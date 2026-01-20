@@ -4,6 +4,7 @@ import { parseArgs } from "./args.js";
 import { promptForPath } from "./prompt.js";
 import { createProject } from "./create.js";
 import { removeModule } from "./remove.js";
+import { generateDocs } from "./docs.js";
 
 function getRepoRoot(): string {
   const __filename = fileURLToPath(import.meta.url);
@@ -60,7 +61,14 @@ async function main(): Promise<void> {
     return;
   }
 
-  console.error("Usage: astro-template create <path> | remove <module>");
+  if (command === "docs") {
+    const result = await generateDocs(getRepoRoot());
+    console.log(`Wrote ${result.modulesPath}`);
+    console.log(`Wrote ${result.configPath}`);
+    return;
+  }
+
+  console.error("Usage: astro-template create <path> | remove <module> | docs");
   process.exit(1);
 }
 
