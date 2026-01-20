@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { listProducts } from "../../services/productService";
+
+const products = await listProducts();
+---
+<BaseLayout title="Products">
+  <h1>Products</h1>
+  <ul class="product-grid">
+    {products.map((product) => (
+      <li>
+        <article>
+          <h2>
+            <a href={`/products/${product.id}`}>{product.name}</a>
+          </h2>
+          <p>{product.description}</p>
+          <p class="price">{(product.priceCents / 100).toFixed(2)} EUR</p>
+        </article>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>
+
+<style>
+  .product-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .price {
+    font-weight: 600;
+  }
+</style>

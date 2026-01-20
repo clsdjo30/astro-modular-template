@@ -8,6 +8,7 @@ import { errorMiddleware } from "./middleware/error.middleware.js";
 import { requestIdMiddleware } from "./middleware/request-id.middleware.js";
 import { buildSessionMiddleware } from "./middleware/session.middleware.js";
 import { authRouter } from "./routes/auth.routes.js";
+import { productsRouter } from "./routes/products.routes.js";
 import { logger } from "./utils/logger.js";
 
 const allowedOrigins = env.apiAllowedOrigin
@@ -51,5 +52,6 @@ app.get("/readyz", async (_req, res, next) => {
 });
 
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/products", productsRouter);
 
 app.use(errorMiddleware);

@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getProduct } from "../../../services/productService";
+
+const { id } = Astro.params;
+const product = id ? await getProduct(id).catch(() => null) : null;
+const title = product ? product.name : "Product";
+---
+<BaseLayout title={title}>
+  {product ? (
+    <article>
+      <h1>{product.name}</h1>
+      <p>{product.description}</p>
+      <p class="price">{(product.priceCents / 100).toFixed(2)} EUR</p>
+      {product.imageUrl && <img src={product.imageUrl} alt={product.name} />}
+    </article>
+  ) : (
+    <p>Product not found.</p>
+  )}
+</BaseLayout>
+
+<style>
+  .price {
+    font-weight: 600;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 1rem;
+  }
+</style>
