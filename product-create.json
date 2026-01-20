@@ -1,7 +1,0 @@
-﻿{
-  "name": "Pizza Margherita",
-  "description": "Tomate, mozzarella, basilic",
-  "priceCents": 950,
-  "image_url": "https://example.com/pizza.jpg",
-  "is_active": true
-}
